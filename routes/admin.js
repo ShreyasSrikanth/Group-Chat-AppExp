@@ -15,10 +15,6 @@ router.get('/login', (req, res, next) => {
 });
 
 router.post("/mes", (req, res, next) => {
-    
-    const username = req.body.username;
-    req.app.locals.username = username;
-
     res.redirect('/message/')
 });
 

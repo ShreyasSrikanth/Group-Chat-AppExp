@@ -27,8 +27,8 @@ router.post('/textData', (req, res, next) => {
     const username = req.body.username;
     const text = req.body.text;
     const data = `${username} : ${text}  .`;
-    fs.appendFileSync("username.txt", data);
 
+    fs.appendFileSync("username.txt", data);
     res.redirect('/message/');
 });
 
