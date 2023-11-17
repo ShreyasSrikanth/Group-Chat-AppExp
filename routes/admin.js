@@ -5,15 +5,13 @@ const fs = require("fs");
 
 
 router.get('/login', (req, res, next) => {
+    
     res.send(`
         <form onsubmit="localStorage.setItem('username', document.getElementById('username').value)" action="/mes" method="POST">
             <input type="text" id="username" name="username" placeholder="Enter your username">
             <button type="submit">Send</button>
         </form>
-        <script>
-        const data = localStorage.getItem('username');
-        </script>
-    `);
+       `);
 });
 
 router.post("/mes", (req, res, next) => {

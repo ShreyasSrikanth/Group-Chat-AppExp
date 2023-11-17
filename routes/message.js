@@ -8,23 +8,28 @@ router.get('/', (req, res, next) => {
     const fileData = fs.readFileSync("username.txt", "utf-8");
 
     res.send(`
-        <p>${fileData}</pre>
-        <form  action="/message/textData" method="POST">
-            <input type="text" id="text" name="text" placeholder="Enter your username">
+        <p>${fileData}</p>
+        <form id="myForm" action="/message/textData" method="POST">
+            <input type="text" id="text" name="text" placeholder="Enter your text">
+            <input type="hidden" id="username" name="username">
             <button type="submit">Send</button>
         </form>
+        <script>
+            document.getElementById('myForm').onsubmit = function() {
+                var username = localStorage.getItem('username');
+                document.getElementById('username').value = username;
+            };
+        </script>
     `);
 });
 
-router.post('/textData', (req,res,next)=>{
-    const username = req.app.locals.username;
+router.post('/textData', (req, res, next) => {
+    const username = req.body.username;
     const text = req.body.text;
-    console.log(username);
     const data = `${username} : ${text}  .`;
-    fs.appendFileSync("username.txt", data)
+    fs.appendFileSync("username.txt", data);
 
-    res.redirect('/message/')
-})
-
+    res.redirect('/message/');
+});
 
 module.exports = router;
